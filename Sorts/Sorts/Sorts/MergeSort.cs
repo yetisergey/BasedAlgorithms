@@ -1,10 +1,11 @@
 ﻿namespace Sorts.Sorts
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     public class MergeSort : Sort
     {
-        protected override List<int> InvokeSort(List<int> list)
+        protected override List<T> InvokeSort<T>(List<T> list)
         {
             if (list.Count <= 1)
                 return list;
@@ -13,13 +14,13 @@
             return Merge(left, right);
         }
 
-        private List<int> Merge(List<int> left, List<int> right)
+        private List<T> Merge<T>(List<T> left, List<T> right) where T : IComparable
         {
-            var result = new List<int>();
+            var result = new List<T>();
             while (left.Count > 0 && right.Count > 0)
             {
-                var temp = 0;
-                if (left.First() <= right.First())
+                T temp;
+                if (left.First().CompareTo( right.First()) <=0)
                 {
                     temp = left.FirstOrDefault();
                     left.RemoveAt(0);

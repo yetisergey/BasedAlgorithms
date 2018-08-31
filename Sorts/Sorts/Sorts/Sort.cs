@@ -6,8 +6,9 @@
     public abstract class Sort
     {
         public Stopwatch stopwatch = new Stopwatch();
-        protected  abstract List<int> InvokeSort(List<int> list);
-        public List<int> Invoke(List<int> list) {
+        protected abstract List<T> InvokeSort<T>(List<T> list) where T:IComparable;
+        public List<T> Invoke<T>(List<T> list) where T : IComparable
+        {
             stopwatch.Reset();
             stopwatch.Start();
             list = InvokeSort(list);

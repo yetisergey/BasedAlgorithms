@@ -1,9 +1,11 @@
 ﻿namespace Sorts.Sorts
 {
+    using System;
     using System.Collections.Generic;
+
     public class ShellSort : Sort
     {
-        protected override List<int> InvokeSort(List<int> list)
+        protected override List<T> InvokeSort<T>(List<T> list)
         {
             int increment = list.Count / 2;
             while (increment >= 1)
@@ -16,15 +18,16 @@
             }
             return list;
         }
-        private void insertionSort(List<int> list, int startIndex, int increment)
+
+        private void insertionSort<T>(List<T> list, int startIndex, int increment) where T : IComparable
         {
             for (int i = startIndex; i < list.Count - 1; i = i + increment)
             {
                 for (int j = (i + increment > list.Count - 1 ? list.Count - 1 : i + increment); j - increment >= 0; j = j - increment)
                 {
-                    if (list[j - increment] > list[j])
+                    if (list[j].CompareTo(list[j - increment]) < 0)
                     {
-                        int tmp = list[j];
+                        T tmp = list[j];
                         list[j] = list[j - increment];
                         list[j - increment] = tmp;
                     }
